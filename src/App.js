@@ -1,5 +1,4 @@
 import React from 'react';
-import Counter from "./counter/Counter";
 import {Provider} from 'react-redux';
 import {createStore} from "redux";
 import Header from "./Header";
@@ -7,7 +6,8 @@ import {ThemeProvider} from '@material-ui/styles'
 import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
 
 const initialState = {
-    count: 0
+    count: 0,
+    open: false
 };
 
 const reducer = (state = initialState, action) => {
@@ -15,6 +15,8 @@ const reducer = (state = initialState, action) => {
         return {count: state.count + 1};
     } else if (action.type === "DEC") {
         return {count: state.count - 1};
+    } else if (action.type === "TOGGLE_DRAWER") {
+        return {count: state.count, open: action.open};
     }
     return state;
 };
@@ -43,7 +45,6 @@ function App() {
         <ThemeProvider theme={theme}>
             <Provider store={store}>
                 <Header/>
-                <Counter/>
             </Provider>
         </ThemeProvider>
     );
